@@ -22,19 +22,19 @@ export default class Message extends React.Component {
 				
 				<div>
 					React create Component example
-					<MessageComponent msg= "Das ist ReactComponent beispiel"/>
+					<MessageComponent msg= "Das ist der Beispiel des ReactComponent "/>
 					
 				</div>
 
 				<div>
 					React create Pure Component example
-					<MessagePureComponent msg= "Dat ist ReactPureCompoment beispiel. In Zukunft ich kann diesen Komponenten verlangen"/>
+					<MessagePureComponent msg= "Das ist der Beispiel des ReactPureCompoment . In Zukunft ich kann diesen Komponenten vergleichen"/>
 					
 				</div>
 
 				<div>
 					React create Functional Component example
-					<MessageFunctionalComponent msg= "Das ist Functional Component beispiel. Es benutzt arrow func. Das ist wunderbar"/>
+					<MessageFunctionalComponent msg= "Das ist Das ist der Beispiel des Functional Component. Es benutzt arrow func. Das ist wunderbar"/>
 					
 				</div>
 			</div>
