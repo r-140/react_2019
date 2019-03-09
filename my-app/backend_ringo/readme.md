@@ -1,0 +1,1 @@
+Server part of the application. Will be implement in Ringo js

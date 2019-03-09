@@ -1,0 +1,1 @@
+Server part of the app. Will be implement in Nodejs
