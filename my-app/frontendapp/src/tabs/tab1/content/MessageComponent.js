@@ -1,6 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-
 
 export default class MessageComponent extends React.Component {
 	render() {

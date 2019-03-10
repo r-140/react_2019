@@ -15,16 +15,19 @@ async function getAssetsFromDB() {
     //fired after last row is emitted
 
 
-    await client.connect();
+     client.connect();
     var res = await client.query('SELECT id, name, version, type, state, domain, domain2, author, language, created_by, creation_date FROM asset where type =$1', ['layout.']);
-    res.rows.forEach(row=>{
-        console.log(row);
+    // res.rows.forEach(row=>{
+    //     console.log(row);
 
-    });
+    // });
 
+    // var resJson = JSON.stringify(res.rows);
+
+    // console.log("result " + resJson);
     
     await client.end();
 
 
-    return res.rows;
+    return resJson;
  }

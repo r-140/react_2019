@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 
 import  MessageComponent  from './MessageComponent';
 
@@ -31,6 +30,12 @@ export default class Message extends React.Component {
 				<div>
 					React create Pure Component example
 					<MessagePureComponent msg= "Das ist der Beispiel des ReactPureCompoment . In Zukunft ich kann diesen Komponenten vergleichen"/>
+					
+				</div>
+
+				<div>
+					React create Functional Component example
+					<MessageFunctionalComponent msg= "Das ist der Beispiel des React Functional Compoment . Es benutzt arrow func. Das idt wunderbar"/>
 					
 				</div>
 

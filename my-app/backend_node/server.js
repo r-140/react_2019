@@ -17,9 +17,21 @@ app.use((req, res, next) => {
 })
 
 api.get('/assets', (req, res) => {
-    var resJson = db.getAssets();
-    console.log(resJson);
-    res.send(resJson);
+    // var resJson = JSON.stringify(db.getAssets());
+    var dbRes = db.getAssets();
+
+
+
+     dbRes.then(function(result) {
+        res.send(result);
+    }).catch(function(err) {
+        res.send(err);
+    });
+
+    // dbRes.then
+
+    // console.log("result " + resJson);
+    // res.send(resJson);
 })
 
 

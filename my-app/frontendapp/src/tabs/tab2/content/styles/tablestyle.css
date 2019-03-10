@@ -1,0 +1,28 @@
+#resTable table {
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+#resTable th, #resTable td {
+    text-align: left;
+    padding: 16px;
+    border: 1px solid black;
+}
+
+#resTable tr:nth-child(even) {
+    background-color: #f2f2f2
+}
+
+
+#page-numbers {
+    list-style: none;
+    display: flex;
+}
+
+#page-numbers > li {
+    margin-right: 0.3em;
+    color: blue;
+    user-select: none;
+    cursor: pointer;
+}
