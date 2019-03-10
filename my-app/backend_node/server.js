@@ -16,23 +16,15 @@ app.use((req, res, next) => {
     next();
 })
 
-api.get('/assets', (req, res) => {
-    // var resJson = JSON.stringify(db.getAssets());
-    var dbRes = db.getAssets();
 
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+)
 
+api.get('/assets', db.getAssets)
 
-     dbRes.then(function(result) {
-        res.send(result);
-    }).catch(function(err) {
-        res.send(err);
-    });
-
-    // dbRes.then
-
-    // console.log("result " + resJson);
-    // res.send(resJson);
-})
 
 
 app.use('/api', api);

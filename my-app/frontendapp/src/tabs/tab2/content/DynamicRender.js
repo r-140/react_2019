@@ -13,13 +13,9 @@ import {loadAssets} from "../../../reducers"
 
   render() {
       const { assets} = this.props;
-    // if (error) {
-    //   return <div>Error: {error.message}</div>;
-    // }
-    // else if (!isLoaded) {
-    //   return <div>Loading...</div>;
-    // }
-    // else {
+
+      console.log("asets " + assets);
+
       return (
         
        <ul>

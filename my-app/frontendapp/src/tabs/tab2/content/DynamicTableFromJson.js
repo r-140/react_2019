@@ -3,7 +3,7 @@ import React from 'react';
 
 import './styles/tablestyle.css';
 
-import {loadAssets} from "../../../reducers"
+// import {loadAssets} from "../../../reducers"
 
 import 'font-awesome/css/font-awesome.min.css';
 
@@ -39,20 +39,20 @@ export default class TableFromJson extends React.Component {
     }
 
     componentDidMount() {
-        // const {result} = loadAssets(5000);
-        // console.log("resultr" + result);
-        // this.setState({data: result});
+
         fetch("http://localhost:63145/api/assets")
-            .then(res => res.json())
+            .then(res => {                            
+                res.json()})
             .then(
-                (result) => {
+                (data) => {
                     this.setState({
                         isLoaded: true,
-                        data: result.data,
-                        cols: getCols(result.data)
+                        data: data.data,
+                        cols: getCols(data.data)
                     });
                 },
                 (error) => {
+                    
                     this.error = error;
                 }
             )
@@ -62,6 +62,7 @@ export default class TableFromJson extends React.Component {
       const { data, currentPage, docsPerPage } = this.state;
 
       console.log('data ---- ', this.state.data);
+
       const indexOfLastDoc = currentPage * docsPerPage;
       const indexOfFirstDoc = indexOfLastDoc - docsPerPage;
       const currentDocs = data.slice(indexOfFirstDoc, indexOfLastDoc);
@@ -129,11 +130,8 @@ export default class TableFromJson extends React.Component {
 
 }
 
-
-
-
-
 function getCols(obj) {
+    console.log("obj---" + obj)
     let propArr = obj[0];
     let arr = [];
     for (const propName in propArr) {

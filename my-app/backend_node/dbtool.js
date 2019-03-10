@@ -1,33 +1,29 @@
 var pg = require('pg');
-var conString = "postgres://corpus:corpus@10.30.0.208:5432/corpus";
-
-module.exports = {
- getAssets: function() {
-     return getAssetsFromDB();
- }
-
-}
-
-async function getAssetsFromDB() {
-    var client = new pg.Client(conString);
-
-    // var queryStr = client.query("SELECT id, name, version, type, state, domain, domain2, author, language, created_by, creation_date FROM asset where type =$1", ['layput.']);
-    //fired after last row is emitted
+// var conString = "postgres://corpus:corpus@10.30.0.208:5432/corpus";
+var conString = "postgres://doccloud:doccloud@localhost:5432/doccloud";
 
 
-     client.connect();
-    var res = await client.query('SELECT id, name, version, type, state, domain, domain2, author, language, created_by, creation_date FROM asset where type =$1', ['layout.']);
-    // res.rows.forEach(row=>{
-    //     console.log(row);
 
-    // });
-
-    // var resJson = JSON.stringify(res.rows);
-
-    // console.log("result " + resJson);
+  const getAssets = (request, response) => {
     
-    await client.end();
+    var client = new pg.Client(conString);
+    client.connect();
+    client.query('SELECT id, sys_title, sys_author, sys_date_cr, sys_type, sys_parent, sys_uuid FROM public.documents', (error, results) => {
+      if (error) {
+        throw error
+      }
+
+    //   var data = results.rows;
+      
+      response.status(200).json(results.rows);
+
+      client.end();
+    })
+  }
+
+  module.exports = {
+    getAssets
+
+  }
 
 
-    return resJson;
- }
