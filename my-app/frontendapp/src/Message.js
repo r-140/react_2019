@@ -7,6 +7,8 @@ import  MessagePureComponent  from './MessagePureComponent';
 
 import  {MessageFunctionalComponent} from './MessageFunctionalComponent';
 
+
+
 import  MessageElement  from './MessageElement';
 
 export default class Message extends React.Component {
@@ -32,11 +34,7 @@ export default class Message extends React.Component {
 					
 				</div>
 
-				<div>
-					React create Functional Component example
-					<MessageFunctionalComponent msg= "Das ist Das ist der Beispiel des Functional Component. Es benutzt arrow func. Das ist wunderbar"/>
-					
-				</div>
+				
 			</div>
 		)
 	}
