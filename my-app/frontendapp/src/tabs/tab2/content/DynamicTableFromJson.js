@@ -41,14 +41,14 @@ export default class TableFromJson extends React.Component {
     componentDidMount() {
 
         fetch("http://localhost:63145/api/assets")
-            .then(res => {                            
-                res.json()})
+            .then(res => res.json())
             .then(
                 (data) => {
+                    console.log(data)
                     this.setState({
                         isLoaded: true,
-                        data: data.data,
-                        cols: getCols(data.data)
+                        data: data,
+                        cols: getCols(data)
                     });
                 },
                 (error) => {
