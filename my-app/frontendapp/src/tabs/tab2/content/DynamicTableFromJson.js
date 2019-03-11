@@ -20,7 +20,7 @@ export default class TableFromJson extends React.Component {
             cols: [],
             data: [],
             currentPage: 1,
-            docsPerPage: 10
+            docsPerPage: 30
         };
         this.handleClick = this.handleClick.bind(this);
     }
@@ -31,10 +31,19 @@ export default class TableFromJson extends React.Component {
         });
     }
 
-    onSort(event, sortKey){
-        console.log(sortKey);
+    onSort(event, sortKey, desc){
+        
         const {data} = this.state;
-        const sortedData = data.sort((a,b) => a[sortKey].localeCompare(b[sortKey]));
+        const sortedData = data.sort((a,b) => { 
+            if(desc===false) {                
+                return a[sortKey] === null ? 1 : a[sortKey].localeCompare(b[sortKey])
+            }
+            else {                
+                return b[sortKey] === null ? -1 : b[sortKey].localeCompare(a[sortKey])
+            }
+        });
+
+
         this.setState({data: sortedData})
     }
 
@@ -44,8 +53,7 @@ export default class TableFromJson extends React.Component {
             .then(res => res.json())
             .then(
                 (data) => {
-                    console.log(data)
-                    this.setState({
+                        this.setState({
                         isLoaded: true,
                         data: data,
                         cols: getCols(data)
@@ -100,15 +108,16 @@ export default class TableFromJson extends React.Component {
 
     generateHeaders = () =>{
         const cols = this.state.cols;
-        return cols.map((colData) => {
+        return <tr>{cols.map((colData) => {
             return <th key={colData} >
                 <span>{colData}</span>
                 <span>
-                    <i className="fa fa-sort-asc" onClick={e => this.onSort(e, colData)}/>
-                    <i className="fa fa-sort-desc" onClick={e => this.onSort(e, colData)} />
+                    <i className="fa fa-sort-asc" onClick={e => this.onSort(e, colData, false)}/>
+                    <i className="fa fa-sort-desc" onClick={e => this.onSort(e, colData, true)} />
                 </span>
-            </th>;
-        });
+            </th>            
+        })
+    }</tr>
     };
 
     generateRows(currentDocs) {
@@ -120,18 +129,18 @@ export default class TableFromJson extends React.Component {
 
         return currentDocs.map(function(item) {
             // handle the column data within each row
+            
             const cells = cols.map(function (colData) {
 
-                return <td>{item[colData]}</td>;
+                return <td key={Math.random()}>{item[colData]}</td>;
             });
-            return <tr key={item.id} onClick={confirmRoute(item.id)} >{cells}</tr>;
+            return <tr key={Math.random()} onClick={confirmRoute(item.id)} >{cells}</tr>;
         });
     }
 
 }
 
 function getCols(obj) {
-    console.log("obj---" + obj)
     let propArr = obj[0];
     let arr = [];
     for (const propName in propArr) {
