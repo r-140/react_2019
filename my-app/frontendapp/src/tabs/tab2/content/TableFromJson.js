@@ -1,16 +1,16 @@
 import React from 'react';
-
+import { connect } from "react-redux";
 
 import './styles/tablestyle.css';
 
-// import {loadAssets} from "../../../reducers"
+import {loadAssets} from "../../../actions/actions"
 
 import 'font-awesome/css/font-awesome.min.css';
 
 // import SortableTable from 'react-sortable-table';
 
 
-export default class TableFromJson extends React.Component {
+export class TableFromJson extends React.Component {
 
     constructor(props) {
         super(props);
@@ -48,22 +48,30 @@ export default class TableFromJson extends React.Component {
     }
 
     componentDidMount() {
+        this.props.loadAssets();
+        this.setState({
+            data: this.props.data,
+            cols: getCols(this.props.data),
+            isLoaded: true,
+            currentPage: this.props.currentPage,
+            docsPerPage: this.props.docsPerPage
 
-        fetch("http://localhost:63145/api/assets")
-            .then(res => res.json())
-            .then(
-                (data) => {
-                        this.setState({
-                        isLoaded: true,
-                        data: data,
-                        cols: getCols(data)
-                    });
-                },
-                (error) => {
+        })
+        // fetch("http://localhost:63145/api/assets")
+        //     .then(res => res.json())
+        //     .then(
+        //         (data) => {
+        //                 this.setState({
+        //                 isLoaded: true,
+        //                 data: data,
+        //                 cols: getCols(data)
+        //             });
+        //         },
+        //         (error) => {
                     
-                    this.error = error;
-                }
-            )
+        //             this.error = error;
+        //         }
+        //     )
     }
 
   render() {
@@ -150,5 +158,24 @@ function getCols(obj) {
     }
     return arr;
 }
+
+function mapStateToProps(state) {
+    return {
+      data: state.data,
+      isLoaded: state.isLoaded,
+    //   cols: getCols(state.data),
+      error: state.error,
+      currentPage: state.currentPage,
+      docsPerPage: state.docsPerPage
+      
+    };
+  }
+  export default connect(
+    mapStateToProps,
+    { loadAssets }
+  )(TableFromJson)
+
+
+
 
 
