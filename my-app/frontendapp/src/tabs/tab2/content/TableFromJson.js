@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import './styles/tablestyle.css';
 
-import {loadAssets, sortAssets} from "../../../actions/actions"
+import {loadAssets, sortAssets, paginationRequest} from "../../../actions/actions"
 
 import 'font-awesome/css/font-awesome.min.css';
 
@@ -14,35 +14,15 @@ export class TableFromJson extends React.Component {
 
 
     handleClick=(event)=> {
-        this.setState({
-            currentPage: Number(event.target.id)
-        });
+        console.log("handleClick(): currentPage ", event.target.id);
+        this.props.paginationRequest(event.target.id);
+        // this.setState({
+        //     currentPage: Number(event.target.id)
+        // });
     }
 
     onSort(event, sortKey, desc){
-
         this.props.sortAssets(sortKey, desc);
-
-        // handleSubmit(event) {
-        //     event.preventDefault();
-        //     const { title } = this.state;
-        //     const id = uuidv1();
-        //     this.props.addArticle({ title, id });
-        //     this.setState({ title: "" });
-        //   }
-        
-        // const {data} = this.props.data;
-
-        // const sortedData = data.sort((a,b) => { 
-        //     if(desc===false) {                
-        //         return a[sortKey] === null ? 1 : a[sortKey].localeCompare(b[sortKey])
-        //     }
-        //     else {                
-        //         return b[sortKey] === null ? -1 : b[sortKey].localeCompare(a[sortKey])
-        //     }
-        // });
-
-        // this.setState({data: sortedData})
     }
 
     componentDidMount() {
@@ -66,7 +46,7 @@ export class TableFromJson extends React.Component {
     }
 
   render() {
-    // const { data, cols, currentPage, docsPerPage } = this.state;
+    
       const { data, cols, currentPage, docsPerPage } = this.props.data;
 
       const indexOfLastDoc = currentPage * docsPerPage;
@@ -105,7 +85,7 @@ export class TableFromJson extends React.Component {
   }
 
     generateHeaders = (cols) =>{
-        // const cols = this.state.cols;
+        
         return <tr>{cols.map((colData) => {
             return <th key={colData} >
                 <span>{colData}</span>
@@ -119,8 +99,7 @@ export class TableFromJson extends React.Component {
     };
 
     generateRows(cols, currentDocs) {
-        // const cols = this.state.cols;  // [{key, label}]
-
+        
         function confirmRoute(id) {
             // console.log(id)
         }
@@ -153,7 +132,7 @@ function mapStateToProps(state) {
   }
   export default connect(
     mapStateToProps,
-    { loadAssets, sortAssets }
+    { loadAssets, sortAssets, paginationRequest }
   )(TableFromJson)
 
 

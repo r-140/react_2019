@@ -1,6 +1,6 @@
 import {combineReducers} from  "redux"
 import {
-     LOAD_ASSETS_SUCCESS, LOAD_ASSETS_ERROR, SORT_ASSETS
+     LOAD_ASSETS_SUCCESS, LOAD_ASSETS_ERROR, SORT_ASSETS, PAGINATION_REQUEST
 } from "../actions/actions"
 
 const initialState = {
@@ -23,16 +23,24 @@ const assetsReducer = (state = initialState, action) => {
 
         case LOAD_ASSETS_ERROR:
             return Object.assign({}, state, {
-                error: state.error.concat(action.payload)
+                error: action.error
             });
 
         case SORT_ASSETS:
-            var sortedData = onSort(state.data, action.sortKey, action.desc);
-            console.log("reducer() sorted List ", sortedData);
+            var sortedData = onSort(state.data, action.sortKey, action.desc);            
             return {
                 ...state,          
                 data: [...state.data,...sortedData]                
-            }    
+            };  
+            
+        case PAGINATION_REQUEST:
+            return Object.assign({}, state, {
+                currentPage: action.currentPage
+            });
+            // return {
+            //     ...state,          
+            //     currentPage: [...state.currentPage,...action.currentPage]                
+            // };  
         default:
             return state;
     }
@@ -51,8 +59,6 @@ function onSort(data, sortKey, desc) {
     });
 
     return sortedData;
-
-    // this.setState({data: sortedData})
 }
 
 function getCols(obj) {
