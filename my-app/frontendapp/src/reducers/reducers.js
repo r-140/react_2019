@@ -27,20 +27,15 @@ const assetsReducer = (state = initialState, action) => {
             });
 
         case SORT_ASSETS:
-            var sortedData = onSort(state.data, action.sortKey, action.desc);            
-            return {
-                ...state,          
-                data: [...state.data,...sortedData]                
-            };  
+            var sortedData = onSort(state.data, action.sortKey, action.desc); 
+            return Object.assign({}, state, {
+                data: sortedData
+            });           
             
         case PAGINATION_REQUEST:
             return Object.assign({}, state, {
                 currentPage: action.currentPage
-            });
-            // return {
-            //     ...state,          
-            //     currentPage: [...state.currentPage,...action.currentPage]                
-            // };  
+            });  
         default:
             return state;
     }
@@ -53,7 +48,13 @@ function onSort(data, sortKey, desc) {
         if(desc===false) {                
             return a[sortKey] === null ? 1 : a[sortKey].localeCompare(b[sortKey])
         }
-        else {                
+        else {   
+                // if(b[sortKey] === null)
+                //     return -1;
+                // else {
+                //     console.log("onSort(): b[sortKey] ", b[sortKey])
+                //     return b[sortKey].localeCompare(a[sortKey])
+                // }
             return b[sortKey] === null ? -1 : b[sortKey].localeCompare(a[sortKey])
         }
     });

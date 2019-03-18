@@ -7,18 +7,11 @@ import {loadAssets, sortAssets, paginationRequest} from "../../../actions/action
 
 import 'font-awesome/css/font-awesome.min.css';
 
-// import SortableTable from 'react-sortable-table';
-
 
 export class TableFromJson extends React.Component {
 
-
     handleClick=(event)=> {
-        console.log("handleClick(): currentPage ", event.target.id);
         this.props.paginationRequest(event.target.id);
-        // this.setState({
-        //     currentPage: Number(event.target.id)
-        // });
     }
 
     onSort(event, sortKey, desc){
@@ -27,22 +20,6 @@ export class TableFromJson extends React.Component {
 
     componentDidMount() {
         this.props.loadAssets();
-
-        // fetch("http://localhost:63145/api/assets")
-        //     .then(res => res.json())
-        //     .then(
-        //         (data) => {
-        //                 this.setState({
-        //                 isLoaded: true,
-        //                 data: data,
-        //                 cols: getCols(data)
-        //             });
-        //         },
-        //         (error) => {
-                    
-        //             this.error = error;
-        //         }
-        //     )
     }
 
   render() {
@@ -117,12 +94,10 @@ export class TableFromJson extends React.Component {
 
 }
 
-
 function mapStateToProps(state) {
     return {
       data: state.data,
       isLoaded: state.isLoaded,
-    //   cols: getCols(state.data),
       cols: state.cols,
       error: state.error,
       currentPage: state.currentPage,

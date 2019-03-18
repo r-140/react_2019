@@ -6,17 +6,15 @@ export const LOAD_ASSETS_ERROR = "loadAssets_error";
 export const SORT_ASSETS = "sort_assets";
 export const PAGINATION_REQUEST = "pagination_request";
 
-export function loadAssetsRequest() {
-    return {type: LOAD_ASSETS_REQUEST}
-}
+// export function loadAssetsRequest() {
+//     return {type: LOAD_ASSETS_REQUEST}
+// }
 
-export function loadAssetsSuccess(data) {
-    console.log("Sussess " + data)
+export function loadAssetsSuccess(data) {    
     return {type: LOAD_ASSETS_SUCCESS, payload: data}
 }
 
-export function loadAssetsError(error) {
-    console.log("Error: " + error)
+export function loadAssetsError(error) {    
     return {type: LOAD_ASSETS_ERROR, error: error}
 }
 
