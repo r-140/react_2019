@@ -12,20 +12,8 @@ import 'font-awesome/css/font-awesome.min.css';
 
 export class TableFromJson extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            error: null,
-            isLoaded: false,
-            cols: [],
-            data: [],
-            currentPage: 1,
-            docsPerPage: 30
-        };
-        this.handleClick = this.handleClick.bind(this);
-    }
 
-    handleClick(event) {
+    handleClick=(event)=> {
         this.setState({
             currentPage: Number(event.target.id)
         });
@@ -33,7 +21,8 @@ export class TableFromJson extends React.Component {
 
     onSort(event, sortKey, desc){
         
-        const {data} = this.state;
+        const {data} = this.props.data;
+
         const sortedData = data.sort((a,b) => { 
             if(desc===false) {                
                 return a[sortKey] === null ? 1 : a[sortKey].localeCompare(b[sortKey])
@@ -43,20 +32,12 @@ export class TableFromJson extends React.Component {
             }
         });
 
-
         this.setState({data: sortedData})
     }
 
     componentDidMount() {
         this.props.loadAssets();
-        this.setState({
-            data: this.props.data,
-            cols: getCols(this.props.data),
-            isLoaded: true,
-            currentPage: this.props.currentPage,
-            docsPerPage: this.props.docsPerPage
 
-        })
         // fetch("http://localhost:63145/api/assets")
         //     .then(res => res.json())
         //     .then(
@@ -75,9 +56,8 @@ export class TableFromJson extends React.Component {
     }
 
   render() {
-      const { data, currentPage, docsPerPage } = this.state;
-
-      console.log('data ---- ', this.state.data);
+    // const { data, cols, currentPage, docsPerPage } = this.state;
+      const { data, cols, currentPage, docsPerPage } = this.props.data;
 
       const indexOfLastDoc = currentPage * docsPerPage;
       const indexOfFirstDoc = indexOfLastDoc - docsPerPage;
@@ -103,8 +83,8 @@ export class TableFromJson extends React.Component {
       return (
           <div id="resTable">
               <table>
-                  <thead>{this.generateHeaders()}</thead>
-                  <tbody>{this.generateRows(currentDocs)}</tbody>
+                  <thead>{this.generateHeaders(cols)}</thead>
+                  <tbody>{this.generateRows(cols, currentDocs)}</tbody>
               </table>
               <ul id="page-numbers">
                   {renderPageNumbers}
@@ -114,8 +94,8 @@ export class TableFromJson extends React.Component {
       );
   }
 
-    generateHeaders = () =>{
-        const cols = this.state.cols;
+    generateHeaders = (cols) =>{
+        // const cols = this.state.cols;
         return <tr>{cols.map((colData) => {
             return <th key={colData} >
                 <span>{colData}</span>
@@ -128,8 +108,8 @@ export class TableFromJson extends React.Component {
     }</tr>
     };
 
-    generateRows(currentDocs) {
-        const cols = this.state.cols;  // [{key, label}]
+    generateRows(cols, currentDocs) {
+        // const cols = this.state.cols;  // [{key, label}]
 
         function confirmRoute(id) {
             // console.log(id)
@@ -148,22 +128,23 @@ export class TableFromJson extends React.Component {
 
 }
 
-function getCols(obj) {
-    let propArr = obj[0];
-    let arr = [];
-    for (const propName in propArr) {
-        if (propArr[propName] !== null || propArr[propName] !== undefined) {
-            arr.push(propName);
-        }
-    }
-    return arr;
-}
+// function getCols(obj) {
+//     let propArr = obj[0];
+//     let arr = [];
+//     for (const propName in propArr) {
+//         if (propArr[propName] !== null || propArr[propName] !== undefined) {
+//             arr.push(propName);
+//         }
+//     }
+//     return arr;
+// }
 
 function mapStateToProps(state) {
     return {
       data: state.data,
       isLoaded: state.isLoaded,
     //   cols: getCols(state.data),
+      cols: state.cols,
       error: state.error,
       currentPage: state.currentPage,
       docsPerPage: state.docsPerPage

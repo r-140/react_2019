@@ -9,15 +9,18 @@ const initialState = {
     cols: [],
     data: [],
     currentPage: 1,
-    docsPerPage: 5
+    docsPerPage: 10
   };
 
 const assetsReducer = (state = initialState, action) => {
     switch(action.type) {
         case LOAD_ASSETS_SUCCESS:
-        return Object.assign({}, state, {            
-            data: state.data.concat(action.payload)
-        });
+        return {
+            ...state,          
+            data: [...state.data,...action.payload],
+            cols: state.cols.concat(getCols(action.payload)),
+
+        };
             // return action.payload;
         case LOAD_ASSETS_ERROR:
         return Object.assign({}, state, {
@@ -29,6 +32,17 @@ const assetsReducer = (state = initialState, action) => {
     }
 
 };
+
+function getCols(obj) {
+    let propArr = obj[0];
+    let arr = [];
+    for (const propName in propArr) {
+        if (propArr[propName] !== null || propArr[propName] !== undefined) {
+            arr.push(propName);
+        }
+    }
+    return arr;
+}
 
 
 

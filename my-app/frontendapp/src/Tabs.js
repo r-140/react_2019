@@ -18,10 +18,10 @@ export default class TabList extends React.Component {
         selectedTab={this.state.selectedTab}
         onChangeTab={this.handleChangeTab}
       >
-        <h1>React tabs</h1>
+        {/* <h1>React tabs</h1>
         <Tab name="first" title="Herzlich willkommen zu React">
           <Tab1Content/>
-        </Tab>
+        </Tab> */}
         <Tab name="second" title="Es gibt ein Beispiel des REST request">
           <Tab2Content/>
         </Tab>
