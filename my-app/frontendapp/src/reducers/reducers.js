@@ -18,15 +18,14 @@ const assetsReducer = (state = initialState, action) => {
         return {
             ...state,          
             data: [...state.data,...action.payload],
-            cols: state.cols.concat(getCols(action.payload)),
-
+            cols: [...state.cols,...getCols(action.payload)],            
         };
             // return action.payload;
         case LOAD_ASSETS_ERROR:
         return Object.assign({}, state, {
             error: state.error.concat(action.payload)
         });
-            // return{data:[], error: action.error};
+            
         default:
             return state;
     }
