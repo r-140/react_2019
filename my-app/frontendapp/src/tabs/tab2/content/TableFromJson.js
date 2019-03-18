@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import './styles/tablestyle.css';
 
-import {loadAssets} from "../../../actions/actions"
+import {loadAssets, sortAssets} from "../../../actions/actions"
 
 import 'font-awesome/css/font-awesome.min.css';
 
@@ -20,19 +20,29 @@ export class TableFromJson extends React.Component {
     }
 
     onSort(event, sortKey, desc){
+
+        this.props.sortAssets(sortKey, desc);
+
+        // handleSubmit(event) {
+        //     event.preventDefault();
+        //     const { title } = this.state;
+        //     const id = uuidv1();
+        //     this.props.addArticle({ title, id });
+        //     this.setState({ title: "" });
+        //   }
         
-        const {data} = this.props.data;
+        // const {data} = this.props.data;
 
-        const sortedData = data.sort((a,b) => { 
-            if(desc===false) {                
-                return a[sortKey] === null ? 1 : a[sortKey].localeCompare(b[sortKey])
-            }
-            else {                
-                return b[sortKey] === null ? -1 : b[sortKey].localeCompare(a[sortKey])
-            }
-        });
+        // const sortedData = data.sort((a,b) => { 
+        //     if(desc===false) {                
+        //         return a[sortKey] === null ? 1 : a[sortKey].localeCompare(b[sortKey])
+        //     }
+        //     else {                
+        //         return b[sortKey] === null ? -1 : b[sortKey].localeCompare(a[sortKey])
+        //     }
+        // });
 
-        this.setState({data: sortedData})
+        // this.setState({data: sortedData})
     }
 
     componentDidMount() {
@@ -128,16 +138,6 @@ export class TableFromJson extends React.Component {
 
 }
 
-// function getCols(obj) {
-//     let propArr = obj[0];
-//     let arr = [];
-//     for (const propName in propArr) {
-//         if (propArr[propName] !== null || propArr[propName] !== undefined) {
-//             arr.push(propName);
-//         }
-//     }
-//     return arr;
-// }
 
 function mapStateToProps(state) {
     return {
@@ -153,7 +153,7 @@ function mapStateToProps(state) {
   }
   export default connect(
     mapStateToProps,
-    { loadAssets }
+    { loadAssets, sortAssets }
   )(TableFromJson)
 
 

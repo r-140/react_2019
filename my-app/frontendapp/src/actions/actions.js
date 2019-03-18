@@ -3,6 +3,8 @@ export const LOAD_ASSETS_REQUEST = "loadAssets_request";
 export const LOAD_ASSETS_SUCCESS = "loadAssets_success";
 export const LOAD_ASSETS_ERROR = "loadAssets_error";
 
+export const SORT_ASSETS = "sort_assets";
+
 export function loadAssetsRequest() {
     return {type: LOAD_ASSETS_REQUEST}
 }
@@ -19,6 +21,12 @@ export function loadAssetsError(error) {
 
 export function loadAssets() {
     return { type: LOAD_ASSETS_REQUEST };
-  }
+}
+
+export function sortAssets(sortKey, desc) { 
+    return { type: SORT_ASSETS, sortKey: sortKey, desc: desc };
+}
+
+
 
   

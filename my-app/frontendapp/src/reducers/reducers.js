@@ -1,6 +1,6 @@
 import {combineReducers} from  "redux"
 import {
-     LOAD_ASSETS_SUCCESS, LOAD_ASSETS_ERROR
+     LOAD_ASSETS_SUCCESS, LOAD_ASSETS_ERROR, SORT_ASSETS
 } from "../actions/actions"
 
 const initialState = {
@@ -9,7 +9,7 @@ const initialState = {
     cols: [],
     data: [],
     currentPage: 1,
-    docsPerPage: 10
+    docsPerPage: 5
   };
 
 const assetsReducer = (state = initialState, action) => {
@@ -20,17 +20,40 @@ const assetsReducer = (state = initialState, action) => {
             data: [...state.data,...action.payload],
             cols: [...state.cols,...getCols(action.payload)],            
         };
-            // return action.payload;
+
         case LOAD_ASSETS_ERROR:
-        return Object.assign({}, state, {
-            error: state.error.concat(action.payload)
-        });
-            
+            return Object.assign({}, state, {
+                error: state.error.concat(action.payload)
+            });
+
+        case SORT_ASSETS:
+            var sortedData = onSort(state.data, action.sortKey, action.desc);
+            console.log("reducer() sorted List ", sortedData);
+            return {
+                ...state,          
+                data: [...state.data,...sortedData]                
+            }    
         default:
             return state;
     }
 
 };
+
+function onSort(data, sortKey, desc) {
+        
+    const sortedData = data.sort((a,b) => { 
+        if(desc===false) {                
+            return a[sortKey] === null ? 1 : a[sortKey].localeCompare(b[sortKey])
+        }
+        else {                
+            return b[sortKey] === null ? -1 : b[sortKey].localeCompare(a[sortKey])
+        }
+    });
+
+    return sortedData;
+
+    // this.setState({data: sortedData})
+}
 
 function getCols(obj) {
     let propArr = obj[0];
