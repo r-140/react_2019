@@ -23,13 +23,15 @@ class FilterForm extends React.Component {
 
 
   handleChange(event) {
-    console.log("selectedDomain: ", event.target.id)
-    this.setState({selectedDomain: event.target.id});
+    // console.log("selectedDomain: ", event.target.value)
+    this.setState({selectedDomain: event.target.value});
   }
 
   handleSubmit(event) {
     // alert('Your favorite flavor is: ' + this.state.value);
     event.preventDefault();
+
+    console.log("selecteddomain ", this.state.selectedDomain);
   }
 
 
@@ -46,14 +48,13 @@ render() {
     <form onSubmit={this.handleSubmit}>
       <label>
         Select Domain:
-        <select value={this.state.selectedDomain} onChange={this.handleChange}>
-        
+        <select value={this.state.selectedDomain} onChange={this.handleChange}>       
 
           {
              
             domains.map(item => (
               
-              <option key={uuidv1()}>
+              <option key={uuidv1()} value={item.pathid}>
                  {item.name}
               </option>
             ))
@@ -66,19 +67,6 @@ render() {
 }
 
 
-
-// generateOptions(cols, currentDocs) {
-        
-//   return currentDocs.map(function(item) {
-//       // handle the column data within each row
-      
-//       const cells = cols.map(function (colData) {
-
-//           return <td key={Math.random()}>{item[colData]}</td>;
-//       });
-//       return <tr key={Math.random()} onClick={confirmRoute(item.id)} >{cells}</tr>;
-//   });
-// }
 
 }
 
