@@ -7,9 +7,9 @@ import {
     
 } from "../actions/actions"
 
-export default function* watcherSaga() {
+export default function* watcherAssetSaga() {
   yield takeEvery(LOAD_ASSETS_REQUEST, workerSaga);
-  yield takeEvery(LOAD_BY_FILTER_REQUEST, workerSaga);
+  // yield takeEvery(LOAD_BY_FILTER_REQUEST, workerSaga);
 }
 function* workerSaga() {
   try {
@@ -21,6 +21,7 @@ function* workerSaga() {
   }
 }
 function loadAssets() {
+  console.log("loadAssets saga")
   return fetch("http://localhost:63145/api/assets").then(response =>
     response.json()
   );

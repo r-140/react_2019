@@ -1,12 +1,20 @@
-import { fork } from "redux-saga/effects";
+import { takeEvery, all} from "redux-saga/effects";
 
-import apiSaga from "./api-saga";
-import apiFilterSaga from "./api-filter-saga";
+
+import watcherAssetSaga from "./api-saga";
+import watcherFilterSaga from "./api-filter-saga";
+
+// export default function* rootSaga() {
+//     yield all([
+//       ...fooSagas,
+//       ...barSagas
+//     ])
+//   }
 
 
 export default function* rootSaga () {
-    yield [
-        fork(apiSaga), // saga1 can also yield [ fork(actionOne), fork(actionTwo) ]
-        fork(apiFilterSaga),
-    ];
+    yield all([
+        watcherAssetSaga(), // saga1 can also yield [ fork(actionOne), fork(actionTwo) ]
+        watcherFilterSaga()
+    ])
 }

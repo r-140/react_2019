@@ -1,15 +1,17 @@
 import React from 'react';
 import { connect } from "react-redux";
 
-import {loadDomains} from "../../actions/filterActions"
+// import { reduxForm } from 'redux-form';
 
-import { loadByFilter } from "../../actions/actions";
+import {loadDomains} from "../../../actions/filterActions"
+
+import { loadByFilter } from "../../../actions/actions";
 
 
-export class FilterForm extends React.Component {
+class FilterForm extends React.Component {
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super()
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   };
@@ -79,8 +81,14 @@ function mapStateToProps(state) {
     error: state.error    
   };
 }
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-  { loadDomains }
-)(FilterForm)
+
+
+const FiltersForm = connect(mapStateToProps, mapDispatchToProps, {loadDomains})(FilterForm);
+export default FiltersForm;
+
+
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps,
+//   { loadDomains }
+// )(FilterForm)

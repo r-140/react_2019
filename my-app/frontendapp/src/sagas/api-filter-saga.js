@@ -5,19 +5,19 @@ import {
     
 } from "../actions/filterActions"
 
-export default function* watcherSaga() {
+export default function* watcherFilterSaga() {
   yield takeEvery(LOAD_DOMAIN_REQUEST, workerSaga);
   
 }
 function* workerSaga() {
   try {
-    const payload = yield call(loadAssets);
+    const payload = yield call(loadDomains);
     yield put({ type: LOAD_DOMAIN_SUCCESS, payload });
   } catch (e) {
     yield put({ type: LOAD_DOMAIN_ERROR, payload: e });
   }
 }
-function loadAssets() {
+function loadDomains() {
   return fetch("http://localhost:63145/api/domains").then(response =>
     response.json()
   );

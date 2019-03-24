@@ -13,14 +13,15 @@ const initialState = {
     docsPerPage: 5
   };
 
-const assetsReducer = (state = initialState, action) => {
+export const assetsReducer = (state = initialState, action) => {
     switch(action.type) {
         case LOAD_ASSETS_SUCCESS:
-        return {
-            ...state,          
-            data: [...state.data,...action.payload],
-            cols: [...state.cols,...getCols(action.payload)],            
-        };
+            console.log("loadAssets reducer")
+            return {
+                ...state,          
+                data: [...state.data,...action.payload],
+                cols: [...state.cols,...getCols(action.payload)],            
+            };
 
         case LOAD_ASSETS_ERROR:
             return Object.assign({}, state, {

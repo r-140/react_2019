@@ -13,6 +13,7 @@ export function loadDomainError(error) {
 }
 
 export function loadDomains() {
+    console.log("loadDomains ")
     return { type: LOAD_DOMAIN_REQUEST };
 }
 

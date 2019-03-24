@@ -26,6 +26,7 @@ export function loadAssetsError(error) {
 }
 
 export function loadAssets() {
+    console.log("loadAssets action")
     return { type: LOAD_ASSETS_REQUEST };
 }
 
