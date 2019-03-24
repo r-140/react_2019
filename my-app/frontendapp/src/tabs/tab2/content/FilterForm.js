@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from "react-redux";
 
-// import { reduxForm } from 'redux-form';
+import uuidv1 from "uuid";
+
 
 import {loadDomains} from "../../../actions/filterActions"
 
@@ -17,7 +18,7 @@ class FilterForm extends React.Component {
   };
 
   state = {
-    selectedDomain: null
+    selectedDomain: ""
   }
 
 
@@ -33,52 +34,65 @@ class FilterForm extends React.Component {
 
 
   componentDidMount() {
-    console.log("componentDid mount props: ", this.props);
     this.props.loadDomains();
+    
 }
 
 render() {
 
-  console.log("filter props: ", this.props);
-
-  const { domains } = this.props;
+   const { domains } = this.props;
 
   return (
     <form onSubmit={this.handleSubmit}>
       <label>
         Select Domain:
         <select value={this.state.selectedDomain} onChange={this.handleChange}>
-
+        
 
           {
+             
             domains.map(item => (
-              <option key={item.pathid}>
+              
+              <option key={uuidv1()}>
                  {item.name}
               </option>
             ))
           }
         </select>
       </label>
-      <input type="submit" value="Submit" />
+      <input type="submit" value="Find Assets" />
     </form>
   );
 }
 
 
+
+// generateOptions(cols, currentDocs) {
+        
+//   return currentDocs.map(function(item) {
+//       // handle the column data within each row
+      
+//       const cells = cols.map(function (colData) {
+
+//           return <td key={Math.random()}>{item[colData]}</td>;
+//       });
+//       return <tr key={Math.random()} onClick={confirmRoute(item.id)} >{cells}</tr>;
+//   });
+// }
+
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    loadByFilter: filter => dispatch(loadByFilter(filter)),
-  };
-}
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     loadByFilter: filter => dispatch(loadByFilter(filter)),
+//   };
+// }
 
 function mapStateToProps(state) {
-  console.log("mapStateToProps: state ", state)
   return {
-    domains: state.domainReducer.domains,
+    domains: state.filterReducer.domains,
     
-    error: state.domainReducer.error    
+    error: state.filterReducer.error    
   };
 }
 

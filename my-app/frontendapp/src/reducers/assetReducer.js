@@ -16,7 +16,6 @@ const initialState = {
 export const assetsReducer = (state = initialState, action) => {
     switch(action.type) {
         case LOAD_ASSETS_SUCCESS:
-            console.log("loadAssets reducer")
             return {
                 ...state,          
                 data: [...state.data,...action.payload],
@@ -30,9 +29,15 @@ export const assetsReducer = (state = initialState, action) => {
 
         case SORT_ASSETS:
             var sortedData = onSort(state.data, action.sortKey, action.desc); 
-            return Object.assign({}, state, {
-                data: sortedData
-            });           
+            return {                
+                ...state,
+                
+                data: [...state.data,...sortedData]
+            };
+            
+            // return Object.assign({}, state, {
+            //     data: sortedData
+            // });           
             
         case PAGINATION_REQUEST:
             return Object.assign({}, state, {
@@ -45,6 +50,8 @@ export const assetsReducer = (state = initialState, action) => {
 };
 
 function onSort(data, sortKey, desc) {
+
+    console.log("onsort sortKey ", sortKey)
         
     const sortedData = data.sort((a,b) => { 
         if(desc===false) {                

@@ -17,6 +17,7 @@ export class TableFromJson extends React.Component {
     }
 
     onSort(event, sortKey, desc){
+        
         this.props.sortAssets(sortKey, desc);
     }
 
@@ -25,7 +26,7 @@ export class TableFromJson extends React.Component {
     }
 
   render() {
-    console.log("render table fron json ", this.props);
+
     const { data, cols, currentPage, docsPerPage } = this.props;
 
     if(data.length === 0) {

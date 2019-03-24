@@ -10,14 +10,11 @@ export default class Tab2Content extends React.Component {
 
   render() {
     return (
-        <div>
-          <ErrorBoundary>
-            <div>
-              <FilterForm/>
-            </div>
-            <div>
+        <div id = "rootstr">
+          <ErrorBoundary>            
+              <FilterForm/>            
+              <br/>            
               <TableFromJson/>
-            </div>
           </ErrorBoundary>
         </div>
     )

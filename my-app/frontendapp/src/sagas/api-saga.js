@@ -21,7 +21,7 @@ function* workerSaga() {
   }
 }
 function loadAssets() {
-  console.log("loadAssets saga")
+
   return fetch("http://localhost:63145/api/assets").then(response =>
     response.json()
   );
