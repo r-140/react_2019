@@ -7,6 +7,8 @@ import {loadAssets, sortAssets, paginationRequest} from "../../../actions/action
 
 import 'font-awesome/css/font-awesome.min.css';
 
+import { EmptyResult } from "./EmptyResult";
+
 
 export class TableFromJson extends React.Component {
 
@@ -24,7 +26,13 @@ export class TableFromJson extends React.Component {
 
   render() {
     
-      const { data, cols, currentPage, docsPerPage } = this.props.data;
+    const { data, cols, currentPage, docsPerPage } = this.props.data;
+
+    if(data.length === 0) {
+        return (
+            <EmptyResult/>
+        )
+    } else {
 
       const indexOfLastDoc = currentPage * docsPerPage;
       const indexOfFirstDoc = indexOfLastDoc - docsPerPage;
@@ -58,7 +66,8 @@ export class TableFromJson extends React.Component {
               </ul>
           </div>
 
-      );
+      )
+    };
   }
 
     generateHeaders = (cols) =>{

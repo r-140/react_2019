@@ -25,6 +25,8 @@ app.use(
 
 api.get('/assets', db.getAssets)
 
+api.get('/domains', db.getDomains)
+
 
 
 app.use('/api', api);
