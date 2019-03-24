@@ -25,8 +25,8 @@ export class TableFromJson extends React.Component {
     }
 
   render() {
-    
-    const { data, cols, currentPage, docsPerPage } = this.props.data;
+    console.log("render table fron json ", this.props);
+    const { data, cols, currentPage, docsPerPage } = this.props;
 
     if(data.length === 0) {
         return (
@@ -105,12 +105,12 @@ export class TableFromJson extends React.Component {
 
 function mapStateToProps(state) {
     return {
-      data: state.data,
-      isLoaded: state.isLoaded,
-      cols: state.cols,
-      error: state.error,
-      currentPage: state.currentPage,
-      docsPerPage: state.docsPerPage
+      data: state.assetsReducer.data,
+      isLoaded: state.assetsReducer.isLoaded,
+      cols: state.assetsReducer.cols,
+      error: state.assetsReducer.error,
+      currentPage: state.assetsReducer.currentPage,
+      docsPerPage: state.assetsReducer.docsPerPage
       
     };
   }

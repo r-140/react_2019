@@ -57,7 +57,7 @@ const getDomains = (request, response) => {
 
 
   // client.query('SELECT pathid, name FROM domain order by pathid', (error, results) => {
-    client.query('SELECT sys_type as pathid, sys_title as name FROM public.system order by syst_type', (error, results) => {
+    client.query('SELECT sys_type as pathid, sys_title as name FROM public.system order by sys_type', (error, results) => {
     if (error) {
       throw error
     }

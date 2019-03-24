@@ -2,13 +2,13 @@ import {
      LOAD_DOMAIN_REQUEST, LOAD_DOMAIN_SUCCESS, LOAD_DOMAIN_ERROR
 } from "../actions/filterActions"
 
-const initialState = {
-    error: null,
-    isLoaded: false,
-    domains: []
-  };
+// const initialState = {
+//     error: null,
+//     isLoaded: false,
+//     domains: []
+//   };
 
-export const domainReducer = (state = initialState, action) => {
+export const domainReducer = (state = {domains: [], error: null}, action) => {
     switch(action.type) {
         case LOAD_DOMAIN_SUCCESS:
             return {

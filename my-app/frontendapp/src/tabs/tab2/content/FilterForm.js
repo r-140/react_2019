@@ -41,7 +41,7 @@ render() {
 
   console.log("filter props: ", this.props);
 
-  const { data } = this.props.data;
+  const { domains } = this.props;
 
   return (
     <form onSubmit={this.handleSubmit}>
@@ -51,7 +51,7 @@ render() {
 
 
           {
-            data.map(item => (
+            domains.map(item => (
               <option key={item.pathid}>
                  {item.name}
               </option>
@@ -76,19 +76,20 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   console.log("mapStateToProps: state ", state)
   return {
-    data: state.domains,
-    isLoaded: state.isLoaded,
-    error: state.error    
+    domains: state.domainReducer.domains,
+    
+    error: state.domainReducer.error    
   };
 }
 
 
-const FiltersForm = connect(mapStateToProps, mapDispatchToProps, {loadDomains})(FilterForm);
-export default FiltersForm;
+// const FiltersForm = connect(mapStateToProps, mapDispatchToProps, {loadDomains})(FilterForm);
+// export default FiltersForm;
 
 
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps,
-//   { loadDomains }
-// )(FilterForm)
+export default connect(
+  mapStateToProps,
+  { loadDomains }
+  // mapDispatchToProps
+  
+)(FilterForm)

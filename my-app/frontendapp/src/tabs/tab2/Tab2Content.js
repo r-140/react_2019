@@ -3,7 +3,7 @@ import React from 'react';
 
 import TableFromJson from './content/TableFromJson';
 import ErrorBoundary from './ErrorBoundary';
-import FiltersForm from './content/FilterForm'
+import FilterForm from './content/FilterForm'
 
 
 export default class Tab2Content extends React.Component {
@@ -12,8 +12,12 @@ export default class Tab2Content extends React.Component {
     return (
         <div>
           <ErrorBoundary>
-            {/* <FiltersForm/> */}
-            <TableFromJson/>
+            <div>
+              <FilterForm/>
+            </div>
+            <div>
+              <TableFromJson/>
+            </div>
           </ErrorBoundary>
         </div>
     )
