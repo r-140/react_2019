@@ -10,7 +10,7 @@ const initialState = {
     cols: [],
     data: [],
     currentPage: 1,
-    docsPerPage: 5
+    docsPerPage: 15
   };
 
 export const assetsReducer = (state = initialState, action) => {
@@ -23,16 +23,21 @@ export const assetsReducer = (state = initialState, action) => {
             };
 
         case LOAD_ASSETS_ERROR:
-            return Object.assign({}, state, {
-                error: action.error
-            });
+        return {                
+            ...state,
+            
+            error: [...action.error]
+        };
+            // return Object.assign({}, state, {
+            //     error: action.error
+            // });
 
         case SORT_ASSETS:
             var sortedData = onSort(state.data, action.sortKey, action.desc); 
             return {                
                 ...state,
                 
-                data: [...state.data,...sortedData]
+                data: [...sortedData]
             };
             
             // return Object.assign({}, state, {
@@ -40,6 +45,11 @@ export const assetsReducer = (state = initialState, action) => {
             // });           
             
         case PAGINATION_REQUEST:
+            // return {                
+            //     ...state,
+                
+            //     currentPage: [...action.currentPage]
+            // };
             return Object.assign({}, state, {
                 currentPage: action.currentPage
             });  
