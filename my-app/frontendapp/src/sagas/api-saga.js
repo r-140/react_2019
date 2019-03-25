@@ -9,12 +9,23 @@ import {
 
 export default function* watcherAssetSaga() {
   yield takeEvery(LOAD_ASSETS_REQUEST, workerSaga);
-  // yield takeEvery(LOAD_BY_FILTER_REQUEST, workerSaga);
+  yield takeEvery(LOAD_BY_FILTER_REQUEST, workerFilterSaga);
 }
 function* workerSaga() {
   try {
     
     const payload = yield call(loadAssets);
+    yield put({ type: LOAD_ASSETS_SUCCESS, payload });
+  } catch (e) {
+    yield put({ type: LOAD_ASSETS_ERROR, payload: e });
+  }
+}
+
+
+function* workerFilterSaga(action) {
+  try {
+    console.log("workerFilterSaga(): action: ", action)
+    const payload = yield call(loadByFilter(action.filter) );
     yield put({ type: LOAD_ASSETS_SUCCESS, payload });
   } catch (e) {
     yield put({ type: LOAD_ASSETS_ERROR, payload: e });
@@ -28,7 +39,7 @@ function loadAssets() {
 }
 
 function loadByFilter(filter) {
-  return fetch("http://localhost:63145/api/assets").then(response =>
+  return fetch("http://localhost:63145/api/assets?filter=", filter).then(response =>
     response.json()
   );
 }

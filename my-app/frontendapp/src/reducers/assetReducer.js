@@ -1,7 +1,7 @@
 
 
 import {
-     LOAD_ASSETS_SUCCESS, LOAD_ASSETS_ERROR, SORT_ASSETS, PAGINATION_REQUEST
+     LOAD_ASSETS_SUCCESS, LOAD_ASSETS_ERROR, SORT_ASSETS, PAGINATION_REQUEST, LOAD_BY_FILTER_REQUEST
 } from "../actions/actions"
 
 const initialState = {
@@ -20,6 +20,13 @@ export const assetsReducer = (state = initialState, action) => {
                 ...state,          
                 data: [...state.data,...action.payload],
                 cols: [...state.cols,...getCols(action.payload)],            
+            };
+
+        case LOAD_BY_FILTER_REQUEST:
+            return {
+                ...state,          
+                data: [...action.payload],
+                           
             };
 
         case LOAD_ASSETS_ERROR:

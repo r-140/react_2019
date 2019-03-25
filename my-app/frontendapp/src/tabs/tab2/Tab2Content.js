@@ -2,6 +2,8 @@ import React from 'react';
 
 import { connect } from "react-redux";
 
+import { bindActionCreators } from 'redux'
+
 
 import TableFromJson from './content/TableFromJson';
 import ErrorBoundary from './ErrorBoundary';
@@ -28,13 +30,18 @@ constructor(){
     this.setState({selectedDomain: event.target.value});
   }
 
-  handleSubmit(event) {
+  // handleDelete = id => {
+  //   this.props.deleteMessage(id)
+  // }
+
+  handleSubmit = event => {
 
     event.preventDefault();
+    const {selectedDomain} = this.state;
+    console.log("selecteddomain ", selectedDomain);
 
-    console.log("selecteddomain ", this.state.selectedDomain);
 
-    this.props.loadByFilter(this.state.selectedDomain );
+    this.props.loadByFilter({selectedDomain} );
   }
 
 
@@ -51,12 +58,31 @@ constructor(){
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    loadByFilter: filter => dispatch(loadByFilter(filter)),
-  };
-}
+// const mapStateToProps = state => state
 
+
+// const mapDispatchToProps = dispatch => (
+  
+//   {
+  
+//     loadByFilter: selectedDomain => dispatch(loadByFilter(selectedDomain)),
+//   }
+// )
+
+
+// const mapDispatchToProps = dispatch => {
+
+//   return { 
+//       loadByFilter: (...selectedDomain) => {
+//              dispatch(loadByFilter(...selectedDomain))
+//        }, 
+      
+//    }
+// }
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ loadByFilter }, dispatch)
+}
 
 export default connect(
   null,
