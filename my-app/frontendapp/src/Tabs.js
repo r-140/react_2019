@@ -2,8 +2,8 @@ import React from 'react';
 
 import './Tabs.css';
 
-import Tab1Content from './tabs/tab1/Tab1Content.js';
-import Tab2Content from './tabs/tab2/Tab2Content.js';
+// import Tab1Content from './tabs/tab1/Tab1Content.js';
+import {Tab2Content} from './tabs/tab2/Tab2Content.js';
 
 
 export default class TabList extends React.Component {

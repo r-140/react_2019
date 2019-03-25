@@ -10,7 +10,7 @@ const initialState = {
     cols: [],
     data: [],
     currentPage: 1,
-    docsPerPage: 15
+    docsPerPage: 5
   };
 
 export const assetsReducer = (state = initialState, action) => {

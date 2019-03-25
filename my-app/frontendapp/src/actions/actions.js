@@ -13,7 +13,8 @@ export const PAGINATION_REQUEST = "pagination_request";
 //     return {type: LOAD_ASSETS_REQUEST}
 // }
 
-export function loadByFilter(filter) {    
+export function loadByFilter(filter) {  
+    console.log("loadBYfileter ", filter);  
     return {type: LOAD_BY_FILTER_REQUEST, filter: filter}
 }
 
