@@ -27,6 +27,8 @@ api.get('/assets', db.getAssets)
 
 api.get('/assets/:filter', db.getAssetsByFilter)
 
+api.get('/assets/:id', db.getAssetById)
+
 api.get('/domains', db.getDomains)
 
 

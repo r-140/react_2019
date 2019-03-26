@@ -47,27 +47,26 @@ const getAssetsByFilter = (request, response) => {
   })
 };
 
-// const getAssetInfo = (request, response) => {
+const getAssetById = (request, response) => {
     
-//   var client = new pg.Client(conString);
-//   client.connect();
+  var client = new pg.Client(conString);
+  client.connect();
 
+  const id = request.params.filter
 
+  // client.query('SELECT id, name, domain, domain2, created_by, creation_date FROM asset where type =$1 and id = $2 group by id', ['layout.', assetId], (error, results) => {
+  client.query('SELECT id, sys_title, sys_author, sys_date_cr, sys_type, sys_parent, sys_uuid FROM public.documents where id = $1', [id], (error, results) => {
+    if (error) {
+      throw error
+    }
 
-//   client.query('SELECT id, name, domain, domain2, created_by, creation_date FROM asset where type =$1 group by id', ['layout.'], (error, results) => {
-//   // client.query('SELECT id, name, version, type, state, domain, domain2, author, language, created_by, creation_date FROM asset where type =$1', ['ddd.'], (error, results) => {
-//   // client.query('SELECT id, sys_title, sys_author, sys_date_cr, sys_type, sys_parent, sys_uuid FROM public.documents', (error, results) => {
-//     if (error) {
-//       throw error
-//     }
-
-//     console.log("getAssetInfo(): data " + results.rows);
+    console.log("getAssetById(): found " + results.rowCount);
     
-//     response.status(200).json(results.rows);
+    response.status(200).json(results.rows);
 
-//     client.end();
-//   })
-// }
+    client.end();
+  })
+}
 
 const getDomains = (request, response) => {
     
@@ -95,7 +94,8 @@ const getDomains = (request, response) => {
   module.exports = {
     getAssets,
     getDomains,
-    getAssetsByFilter
+    getAssetsByFilter,
+    getAssetById
 
   }
 

@@ -32,10 +32,10 @@ function* workerFilterSaga(action) {
 
     const payload = yield call(loadByFilter, {filter});
 
-    console.log("action result ", payload)
+    
     yield put({ type: LOAD_BY_FILTER_SUCCESS, payload });
   } catch (e) {
-    console.log("action error ", e)
+    
     yield put({ type: LOAD_BY_FILTER_ERROR, error: e });
   }
 }
