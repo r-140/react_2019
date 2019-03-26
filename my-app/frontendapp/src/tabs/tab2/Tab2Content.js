@@ -9,85 +9,71 @@ import TableFromJson from './content/TableFromJson';
 import ErrorBoundary from './ErrorBoundary';
 import FilterForm from './content/FilterForm'
 import { loadByFilter } from "../../actions/actions";
+import { loadDomains } from "../../actions/filterActions"
 
-export class Tab2Content extends React.Component {
+class Tab2Content extends React.Component {
 
-constructor(){
-  super();
-  // super(props);
 
-  this.handleChange = this.handleChange.bind(this);
-  this.handleSubmit = this.handleSubmit.bind(this);
-
-}
 
   state = {
-    selectedDomain: ""
+    selectedDomain: null
+  }
+
+  componentDidMount() {
+    this.props.loadDomains();
   }
 
 
-  handleChange(event) {    
-    this.setState({selectedDomain: event.target.value});
+  handleChange = (value) => {
+    console.log({ value })
+    this.setState({ selectedDomain: value });
   }
 
-  // handleDelete = id => {
-  //   this.props.deleteMessage(id)
-  // }
 
   handleSubmit = event => {
 
     event.preventDefault();
-    const {selectedDomain} = this.state;
+    const { selectedDomain } = this.state;
     console.log("selecteddomain ", selectedDomain);
 
 
-    this.props.loadByFilter({selectedDomain} );
+    this.props.loadByFilter({ selectedDomain });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.domains !== prevProps.domains) {
+      this.setState({
+        selectedDomain: this.props.domains[0].pathid
+      });
+    }
   }
 
 
   render() {
     return (
-        <div id = "rootstr">
-          <ErrorBoundary>            
-              <FilterForm handleChange = {this.handleChange} handleSubmit = {this.handleSubmit}/>            
-              <br/>            
-              <TableFromJson/>
-          </ErrorBoundary>
-        </div>
+      <div id="rootstr">
+        <ErrorBoundary>
+          <FilterForm domains={this.props.domains} value={this.state.selectedDomain} onChange={this.handleChange} handleSubmit={this.handleSubmit} />
+          <br />
+          <TableFromJson />
+        </ErrorBoundary>
+      </div>
     )
   }
 }
 
-// const mapStateToProps = state => state
+function mapStateToProps(state) {
+  return {
+    domains: state.filterReducer.domains,
 
-
-// const mapDispatchToProps = dispatch => (
-  
-//   {
-  
-//     loadByFilter: selectedDomain => dispatch(loadByFilter(selectedDomain)),
-//   }
-// )
-
-
-// const mapDispatchToProps = dispatch => {
-
-//   return { 
-//       loadByFilter: (...selectedDomain) => {
-//              dispatch(loadByFilter(...selectedDomain))
-//        }, 
-      
-//    }
-// }
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ loadByFilter }, dispatch)
+    error: state.filterReducer.error
+  };
 }
 
 export default connect(
-  null,
-  mapDispatchToProps
-  
+  mapStateToProps,
+  { loadByFilter, loadDomains }
+
 )(Tab2Content)
 
 

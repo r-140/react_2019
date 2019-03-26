@@ -17,7 +17,7 @@ function* workerSaga() {
     const payload = yield call(loadAssets);
     yield put({ type: LOAD_ASSETS_SUCCESS, payload });
   } catch (e) {
-    yield put({ type: LOAD_ASSETS_ERROR, payload: e });
+    yield put({ type: LOAD_ASSETS_ERROR, error: e });
   }
 }
 
@@ -34,12 +34,12 @@ function* workerFilterSaga(action) {
 function loadAssets() {
 
   return fetch("http://localhost:63145/api/assets").then(response =>
-    response.json()
+      response.json()
   );
 }
 
 function loadByFilter(filter) {
-  return fetch("http://localhost:63145/api/assets?filter=", filter).then(response =>
+  return fetch(`http://localhost:63145/api/assets?filter=${filter}`).then(response =>
     response.json()
   );
 }

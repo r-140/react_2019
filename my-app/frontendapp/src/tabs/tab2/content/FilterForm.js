@@ -1,67 +1,40 @@
 import React from 'react';
-import { connect } from "react-redux";
 
 import uuidv1 from "uuid";
 
-
-import {loadDomains} from "../../../actions/filterActions"
-
 class FilterForm extends React.Component {
 
-  // constructor(props) {
-  //   super(props)
-  
+ 
 
-  // };
+  render() {
 
-  componentDidMount() {
-    this.props.loadDomains();
-    
-}
+    const { domains } = this.props;
 
-render() {
+    return (
+      <form onSubmit={this.props.handleSubmit}>
+        <label>
+          Select Domain:
+        <select value={this.props.value || ''} onChange={e => this.props.onChange(e.target.value)}>
 
-   const { domains } = this.props;
+            {
 
-  return (
-    <form onSubmit={this.props.handleSubmit}>
-      <label>
-        Select Domain:
-        <select value={this.props.selectedDomain} onChange={this.props.handleChange}>       
+              domains.map(item => (
 
-          {
-             
-            domains.map(item => (
-              
-              <option key={uuidv1()} value={item.pathid}>
-                 {item.name}
-              </option>
-            ))
-          }
-        </select>
-      </label>
-      <input type="submit" value="Find Assets" />
-    </form>
-  );
-}
+                <option key={uuidv1()} value={item.pathid}>
+                  {item.name}
+                </option>
+              ))
+            }
+          </select>
+        </label>
+        <input type="submit" value="Find Assets" />
+      </form>
+    );
+  }
 
 
 
 }
 
+export default FilterForm;
 
-
-function mapStateToProps(state) {
-  return {
-    domains: state.filterReducer.domains,
-    
-    error: state.filterReducer.error    
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  { loadDomains }
-  // mapDispatchToProps
-  
-)(FilterForm)

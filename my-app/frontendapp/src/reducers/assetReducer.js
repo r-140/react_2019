@@ -47,10 +47,6 @@ export const assetsReducer = (state = initialState, action) => {
                 data: [...sortedData]
             };
             
-            // return Object.assign({}, state, {
-            //     data: sortedData
-            // });           
-            
         case PAGINATION_REQUEST:
             // return {                
             //     ...state,
