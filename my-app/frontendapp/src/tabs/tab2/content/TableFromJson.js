@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from "react-redux";
 
+import { Link, Route } from 'react-router-dom';
+
 import './styles/tablestyle.css';
 
 import {loadAssets, sortAssets, paginationRequest} from "../../../actions/actions"
@@ -9,6 +11,10 @@ import 'font-awesome/css/font-awesome.min.css';
 
 import { EmptyResult } from "./EmptyResult";
 
+import {AssetDetailInfo} from './AssetDetailInfo'
+
+//see here for example branch finished
+//https://github.com/searsaw/react-router-demo/tree/finished/src/fe/components
 
 export class TableFromJson extends React.Component {
 
@@ -25,7 +31,13 @@ export class TableFromJson extends React.Component {
         this.props.loadAssets();
     }
 
-  render() {
+    componentWillReceiveProps({ location = {} }) {
+        if (location.pathname === '/assets' && location.pathname !== this.props.location.pathname) {
+          this.getUsers();
+        }
+    }
+
+   render() {
 
     const { data, cols, currentPage, docsPerPage } = this.props;
 
@@ -65,6 +77,8 @@ export class TableFromJson extends React.Component {
               <ul id="page-numbers">
                   {renderPageNumbers}
               </ul>
+
+              <Route path="/asset/:id" component={AssetDetailInfo} />
           </div>
 
       )
@@ -95,10 +109,12 @@ export class TableFromJson extends React.Component {
             // handle the column data within each row
             
             const cells = cols.map(function (colData) {
-
+                  console.log("generateRows() colData ", colData)  
+                // return colData == 'id' ? <Link to={`/assets/${item.id}`}>{item.id}</Link> : <td key={Math.random()}>{item[colData]}</td>;
                 return <td key={Math.random()}>{item[colData]}</td>;
             });
-            return <tr key={Math.random()} onClick={confirmRoute(item.id)} >{cells}</tr>;
+            return <tr key={Math.random()} >{cells}</tr>;
+            // return <tr key={Math.random()} onClick={confirmRoute(item.id)} >{cells}</tr>;
         });
     }
 

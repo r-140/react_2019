@@ -10,8 +10,6 @@ import { loadDomains } from "../../actions/filterActions"
 
 class Tab2Content extends React.Component {
 
-
-
   state = {
     selectedDomain: null
   }

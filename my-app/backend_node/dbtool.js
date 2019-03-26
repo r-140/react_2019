@@ -55,7 +55,7 @@ const getAssetById = (request, response) => {
   const id = request.params.filter
 
   // client.query('SELECT id, name, domain, domain2, created_by, creation_date FROM asset where type =$1 and id = $2 group by id', ['layout.', assetId], (error, results) => {
-  client.query('SELECT id, sys_title, sys_author, sys_date_cr, sys_type, sys_parent, sys_uuid FROM public.documents where id = $1', [id], (error, results) => {
+  client.query('SELECT id, sys_title as name, sys_author as created_by, sys_date_cr as creation_date, sys_type as domain, sys_parent as domain2 FROM public.documents where id = $1', [id], (error, results) => {
     if (error) {
       throw error
     }

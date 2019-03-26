@@ -2,6 +2,8 @@ import React from 'react';
 
 import './Tabs.css';
 
+import {BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
+
 // import Tab1Content from './tabs/tab1/Tab1Content.js';
 import Tab2Content from './tabs/tab2/Tab2Content.js';
 
@@ -18,11 +20,17 @@ export default class TabList extends React.Component {
         selectedTab={this.state.selectedTab}
         onChangeTab={this.handleChangeTab}
       >
+
         {/* <h1>React tabs</h1>
         <Tab name="first" title="Herzlich willkommen zu React">
           <Tab1Content/>
         </Tab> */}
         <Tab name="second" title="Es gibt ein Beispiel des REST request">
+        {/* <BrowserRouter>
+        <Switch>
+          <Route path="/assets" component={Tab2Content} />
+        </Switch>
+      </BrowserRouter> */}
           <Tab2Content/>
         </Tab>
         
