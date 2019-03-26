@@ -2,9 +2,6 @@ import React from 'react';
 
 import { connect } from "react-redux";
 
-import { bindActionCreators } from 'redux'
-
-
 import TableFromJson from './content/TableFromJson';
 import ErrorBoundary from './ErrorBoundary';
 import FilterForm from './content/FilterForm'
@@ -25,7 +22,6 @@ class Tab2Content extends React.Component {
 
 
   handleChange = (value) => {
-    console.log({ value })
     this.setState({ selectedDomain: value });
   }
 
@@ -33,11 +29,8 @@ class Tab2Content extends React.Component {
   handleSubmit = event => {
 
     event.preventDefault();
-    const { selectedDomain } = this.state;
-    console.log("selecteddomain ", selectedDomain);
 
-
-    this.props.loadByFilter({ selectedDomain });
+    this.props.loadByFilter(this.state.selectedDomain);
   }
 
   componentDidUpdate(prevProps) {

@@ -3,11 +3,11 @@ import { takeEvery, call, put } from "redux-saga/effects";
 // https://medium.freecodecamp.org/redux-saga-common-patterns-48437892e11c
 
 import {
-    LOAD_ASSETS_REQUEST, LOAD_ASSETS_SUCCESS, LOAD_ASSETS_ERROR, LOAD_BY_FILTER_REQUEST
+    LOAD_ASSETS_REQUEST, LOAD_ASSETS_SUCCESS, LOAD_ASSETS_ERROR, LOAD_BY_FILTER_REQUEST, LOAD_BY_FILTER_SUCCESS, LOAD_BY_FILTER_ERROR
     
 } from "../actions/actions"
 
-export default function* watcherAssetSaga() {
+export  function* watcherAssetSaga() {
   yield takeEvery(LOAD_ASSETS_REQUEST, workerSaga);
   yield takeEvery(LOAD_BY_FILTER_REQUEST, workerFilterSaga);
 }
@@ -24,11 +24,19 @@ function* workerSaga() {
 
 function* workerFilterSaga(action) {
   try {
-    console.log("workerFilterSaga(): action: ", action)
-    const payload = yield call(loadByFilter(action.filter) );
-    yield put({ type: LOAD_ASSETS_SUCCESS, payload });
+    
+    const {filter} = action;
+
+// in case of many arguments us this construction
+// const payload = yield call(loadByFilter, [{filter}]);
+
+    const payload = yield call(loadByFilter, {filter});
+
+    console.log("action result ", payload)
+    yield put({ type: LOAD_BY_FILTER_SUCCESS, payload });
   } catch (e) {
-    yield put({ type: LOAD_ASSETS_ERROR, payload: e });
+    console.log("action error ", e)
+    yield put({ type: LOAD_BY_FILTER_ERROR, error: e });
   }
 }
 function loadAssets() {
@@ -38,8 +46,10 @@ function loadAssets() {
   );
 }
 
+// todo add additional filters
 function loadByFilter(filter) {
-  return fetch(`http://localhost:63145/api/assets?filter=${filter}`).then(response =>
+
+  return fetch(`http://localhost:63145/api/assets/${filter.filter}`).then(response =>
     response.json()
   );
 }

@@ -1,7 +1,7 @@
 
 
 import {
-     LOAD_ASSETS_SUCCESS, LOAD_ASSETS_ERROR, SORT_ASSETS, PAGINATION_REQUEST, LOAD_BY_FILTER_REQUEST
+     LOAD_ASSETS_SUCCESS, LOAD_ASSETS_ERROR, SORT_ASSETS, PAGINATION_REQUEST, LOAD_BY_FILTER_SUCCESS, LOAD_BY_FILTER_ERROR
 } from "../actions/actions"
 
 const initialState = {
@@ -22,22 +22,33 @@ export const assetsReducer = (state = initialState, action) => {
                 cols: [...state.cols,...getCols(action.payload)],            
             };
 
-        case LOAD_BY_FILTER_REQUEST:
+        case LOAD_BY_FILTER_SUCCESS:
+            var filtereddata = action.payload;
+            console.log("assetReducer filered data ", filtereddata);
             return {
                 ...state,          
-                data: [...action.payload],
-                           
+                data: [...filtereddata],
             };
 
         case LOAD_ASSETS_ERROR:
-        return {                
-            ...state,
-            
-            error: [...action.error]
-        };
+            return {                
+                ...state,
+                
+                error: [...action.error]
+            };
             // return Object.assign({}, state, {
             //     error: action.error
             // });
+
+        case LOAD_BY_FILTER_ERROR:
+            return {                
+                ...state,
+                
+                error: [...action.error]
+            };
+                // return Object.assign({}, state, {
+                //     error: action.error
+                // });
 
         case SORT_ASSETS:
             var sortedData = onSort(state.data, action.sortKey, action.desc); 

@@ -25,6 +25,8 @@ app.use(
 
 api.get('/assets', db.getAssets)
 
+api.get('/assets/:filter', db.getAssetsByFilter)
+
 api.get('/domains', db.getDomains)
 
 
