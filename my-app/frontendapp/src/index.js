@@ -2,12 +2,13 @@ import React from 'react'
 
 import { render } from "react-dom";
 import { Provider } from "react-redux";
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 
 import TabList from './Tabs.js';
 
 import store from './store'
+import Tab2Content from './tabs/tab2/Tab2Content.js';
 
 render(
     <Provider store={store}>
@@ -15,6 +16,7 @@ render(
         <Switch>
           {/* <Route path="/login" component={Login} /> */}
           <Route path="/" component={TabList} />
+          <Route path="/assets" component={Tab2Content} />
         </Switch>
       </BrowserRouter>
 

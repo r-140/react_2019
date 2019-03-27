@@ -1,6 +1,6 @@
 var pg = require('pg');
-// var conString = "postgres://corpus:corpus@10.30.0.208:5432/corpus";
-var conString = "postgres://doccloud:doccloud@localhost:5432/doccloud";
+var conString = "postgres://corpus:corpus@10.30.0.208:5432/corpus";
+// var conString = "postgres://doccloud:doccloud@localhost:5432/doccloud";
 
 
 
@@ -12,8 +12,8 @@ const getAssets = (request, response) => {
   client.connect();
 
 
-  // client.query('SELECT id, name, domain, domain2, created_by, creation_date FROM asset where type =$1', ['layout.'], (error, results) => {
-  client.query('SELECT id, sys_title, sys_author, sys_date_cr, sys_type, sys_parent, sys_uuid FROM public.documents', (error, results) => {
+  client.query('SELECT id, name, domain, domain2, created_by, creation_date FROM asset where type =$1', ['layout.'], (error, results) => {
+  // client.query('SELECT id, sys_title, sys_author, sys_date_cr, sys_type, sys_parent, sys_uuid FROM public.documents', (error, results) => {
     if (error) {
       throw error
     }
@@ -35,8 +35,8 @@ const getAssetsByFilter = (request, response) => {
   // todo parse filter json
   const domain = request.params.filter
 
-  // client.query('SELECT id, name, domain, domain2, created_by, creation_date FROM asset where type =$1 and domain=$2', ['layout.', domain], (error, results) => {
-  client.query('SELECT id, sys_title, sys_author, sys_date_cr, sys_type, sys_parent, sys_uuid FROM public.documents where sys_type =$1', [domain], (error, results) => {
+  client.query('SELECT id, name, domain, domain2, created_by, creation_date FROM asset where type =$1 and domain=$2', ['layout.', domain], (error, results) => {
+  // client.query('SELECT id, sys_title, sys_author, sys_date_cr, sys_type, sys_parent, sys_uuid FROM public.documents where sys_type =$1', [domain], (error, results) => {
     if (error) {
       throw error
     }
@@ -54,8 +54,8 @@ const getAssetById = (request, response) => {
 
   const id = request.params.filter
 
-  // client.query('SELECT id, name, domain, domain2, created_by, creation_date FROM asset where type =$1 and id = $2 group by id', ['layout.', assetId], (error, results) => {
-  client.query('SELECT id, sys_title as name, sys_author as created_by, sys_date_cr as creation_date, sys_type as domain, sys_parent as domain2 FROM public.documents where id = $1', [id], (error, results) => {
+  client.query('SELECT id, name, domain, domain2, created_by, creation_date FROM asset where type =$1 and id = $2 group by id', ['layout.', id], (error, results) => {
+  // client.query('SELECT id, sys_title as name, sys_author as created_by, sys_date_cr as creation_date, sys_type as domain, sys_parent as domain2 FROM public.documents where id = $1', [id], (error, results) => {
     if (error) {
       throw error
     }
@@ -74,8 +74,8 @@ const getDomains = (request, response) => {
   client.connect();
 
 
-  // client.query('SELECT pathid, name FROM domain order by pathid', (error, results) => {
-    client.query('SELECT sys_symbolic_name as pathid, sys_title as name FROM public.system', (error, results) => {
+  client.query('SELECT pathid, name FROM domain order by pathid', (error, results) => {
+    // client.query('SELECT sys_symbolic_name as pathid, sys_title as name FROM public.system', (error, results) => {
     if (error) {
       throw error
     }
