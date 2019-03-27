@@ -33,11 +33,21 @@ export class AssetDetailInfo extends React.Component {
 		console.log("asset name ", asset);
 		return (
 			<div >
-				<div> {asset.name}</div>	
+				<div>
+					<div>ID: {asset.id}</div>
+
+					<div>Name: {asset.name}</div>	
+
+					<div>Domain: {asset.domain}</div>	
+
+					<div>Domain2: {asset.domain2}</div>	
+
+					<div>Author: {asset.created_by}</div>	
+				</div>
 
 				<div>
-				<Link to="/assets">
-						<button >Close</button >
+					<Link to="/assets">
+							<button >Close</button >
 					</Link>
 				</div>
 			</div>
