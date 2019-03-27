@@ -16,10 +16,11 @@ const initialState = {
 export const assetsReducer = (state = initialState, action) => {
     switch(action.type) {
         case LOAD_ASSETS_SUCCESS:
+
             return {
                 ...state,          
-                data: [...state.data,...action.payload],
-                cols: [...state.cols,...getCols(action.payload)],            
+                data: [...action.payload],
+                cols: [...getCols(action.payload)],            
             };
 
         case LOAD_BY_FILTER_SUCCESS:
