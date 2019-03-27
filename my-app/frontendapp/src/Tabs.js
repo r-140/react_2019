@@ -28,11 +28,6 @@ export default class TabList extends React.Component {
           <Tab1Content/>
         </Tab> */}
         <Tab name="second" title="Es gibt ein Beispiel des REST request">
-        {/* <BrowserRouter>
-        <Switch>
-          <Route path="/assets" component={Tab2Content} />
-        </Switch>
-      </BrowserRouter> */}
           <Tab2Content/>
         </Tab>
         

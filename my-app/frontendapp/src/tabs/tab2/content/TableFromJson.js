@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 
-import { Link, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import './styles/tablestyle.css';
 
@@ -11,10 +11,7 @@ import 'font-awesome/css/font-awesome.min.css';
 
 import { EmptyResult } from "./EmptyResult";
 
-import {AssetDetailInfo} from './AssetDetailInfo'
-
-//see here for example branch finished
-//https://github.com/searsaw/react-router-demo/tree/finished/src/fe/components
+// import {AssetDetailInfo} from './AssetDetailInfo'
 
 export class TableFromJson extends React.Component {
 
@@ -33,7 +30,7 @@ export class TableFromJson extends React.Component {
 
     componentWillReceiveProps({ location = {} }) {
         if (location.pathname === '/assets' && location.pathname !== this.props.location.pathname) {
-          this.getUsers();
+            this.props.loadAssets();
         }
     }
 
@@ -70,15 +67,14 @@ export class TableFromJson extends React.Component {
 
       return (
           <div id="resTable">
-              <table>
-                  <thead>{this.generateHeaders(cols)}</thead>
-                  <tbody>{this.generateRows(cols, currentDocs)}</tbody>
-              </table>
-              <ul id="page-numbers">
-                  {renderPageNumbers}
-              </ul>
+                <table>
+                    <thead>{this.generateHeaders(cols)}</thead>
+                    <tbody>{this.generateRows(cols, currentDocs)}</tbody>
+                </table>
+                <ul id="page-numbers">
+                    {renderPageNumbers}
+                </ul>
 
-              <Route path="/asset/:id" component={AssetDetailInfo} />
           </div>
 
       )
@@ -101,20 +97,12 @@ export class TableFromJson extends React.Component {
 
     generateRows(cols, currentDocs) {
         
-        function confirmRoute(id) {
-            // console.log(id)
-        }
-
         return currentDocs.map(function(item) {
-            // handle the column data within each row
-            
-            const cells = cols.map(function (colData) {
-                  console.log("generateRows() colData ", colData)  
-                // return colData == 'id' ? <Link to={`/assets/${item.id}`}>{item.id}</Link> : <td key={Math.random()}>{item[colData]}</td>;
-                return <td key={Math.random()}>{item[colData]}</td>;
+            // handle the column data within each row            
+            const cells = cols.map(function (colData) {                   
+                return colData === 'id' ? <td key = {Math.random}><Link  to={`/assets/${item.id}`} >{item.id}</Link></td> : <td key={Math.random()}>{item[colData]}</td>;
             });
             return <tr key={Math.random()} >{cells}</tr>;
-            // return <tr key={Math.random()} onClick={confirmRoute(item.id)} >{cells}</tr>;
         });
     }
 

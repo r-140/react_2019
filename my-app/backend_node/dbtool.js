@@ -52,9 +52,11 @@ const getAssetById = (request, response) => {
   var client = new pg.Client(conString);
   client.connect();
 
-  const id = request.params.filter
+  const id = request.params.id
 
-  client.query('SELECT id, name, domain, domain2, created_by, creation_date FROM asset where type =$1 and id = $2 group by id', ['layout.', id], (error, results) => {
+  console.log("assetById assetid ", id);
+
+  client.query('SELECT id, name, domain, domain2, created_by, creation_date FROM asset where type =$1 and id = $2', ['layout.', id], (error, results) => {
   // client.query('SELECT id, sys_title as name, sys_author as created_by, sys_date_cr as creation_date, sys_type as domain, sys_parent as domain2 FROM public.documents where id = $1', [id], (error, results) => {
     if (error) {
       throw error

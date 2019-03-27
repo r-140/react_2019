@@ -1,27 +1,25 @@
 import React from 'react'
 
-import { Button, Image, Modal } from 'semantic-ui-react';
-
 import { Link } from 'react-router-dom';
 
 export class AssetDetailInfo extends React.Component {
 
 	state = {
-		assets: []
-	}
+		asset: { name: '' }
+		
+	};
+
 
 	componentDidMount(){
-		// todo prbably it i=need to use componentDidupdate instead
-
 		const { match: { params } } = this.props;
 
-		fetch(`http://localhost:63145/api/assets/${params.id}`)
+		fetch(`http://localhost:63145/api/assets/asset/${params.id}`)
             .then(res => res.json())
             .then(
-                (result) => {
-                    console.log(result);
+                (asset) => {
+                    
                     this.setState({
-                        assets: result,
+                        asset: asset[0]
                     });
                 },
                 (error) => {
@@ -30,28 +28,20 @@ export class AssetDetailInfo extends React.Component {
             )
 	}
 	render() {
+		
 		const {asset} = this.state;
+		console.log("asset name ", asset);
 		return (
-			<Modal open dimmer="blurring">				
-	
-				<Modal.Header>{asset.name}</Modal.Header>
-				<Modal.Content>
-				<Modal.Description>
-				{/* name, domain, domain2, created_by, creation_date */}
-					<p>Name: {asset.name}</p>
-					<p>domain: {asset.domain}</p>
-					<p>domain2: {asset.domain2}</p>
-					<p>created_by: {asset.created_by}</p>
-					<p>creation_date: {asset.creation_date}</p>
-				</Modal.Description>
-				</Modal.Content>
+			<div >
+				<div> {asset.name}</div>	
 
-				<Modal.Actions>
-					<Link to="/assets">
-						<Button>Close</Button>
+				<div>
+				<Link to="/assets">
+						<button >Close</button >
 					</Link>
-        </Modal.Actions>			
-			</Modal>
+				</div>
+			</div>
 		)
 	}
+	
 }

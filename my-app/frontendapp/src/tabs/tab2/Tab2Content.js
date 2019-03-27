@@ -42,7 +42,7 @@ class Tab2Content extends React.Component {
 
   render() {
     return (
-      <div id="rootstr">
+      <div key="rootstr">
         <ErrorBoundary>
           <FilterForm domains={this.props.domains} value={this.state.selectedDomain} onChange={this.handleChange} handleSubmit={this.handleSubmit} />
           <br />
