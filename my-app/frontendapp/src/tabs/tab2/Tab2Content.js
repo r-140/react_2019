@@ -50,7 +50,11 @@ class Tab2Content extends React.Component {
     return (
       <div key="rootstr">
         <ErrorBoundary>
-          <FilterForm domains={this.props.domains} value={this.state.selectedDomain} onChange={this.handleChange} handleSubmit={this.handleSubmit} />
+          <FilterForm domains={this.props.domains} domains2 ={this.props.domains2} 
+                      languages ={this.props.languages} workflows ={this.props.workflows} assettypes ={this.props.assettypes}
+            value={this.state.selectedDomain}
+             onChange={this.handleChange}
+             handleSubmit={this.handleSubmit} />
           <br />
           <TableFromJson />
         </ErrorBoundary>

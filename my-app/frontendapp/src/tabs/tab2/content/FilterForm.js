@@ -17,6 +17,8 @@ class FilterForm extends React.Component {
       <form onSubmit={this.props.handleSubmit}>
 
       <SelectComponent label = "Select Domain: " value={this.props.value} domains={this.props.domains} onChange={this.props.onChange}/>
+
+      <SelectComponent label = "Select Domain2: " value={this.props.value} domains={this.props.domains2} onChange={this.props.onChange}/>
         {/* <label>
           Select Domain:
         <select value={this.props.value || ''} onChange={e => this.props.onChange(e.target.value)}>
