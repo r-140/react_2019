@@ -11,7 +11,7 @@ import { loadDomains, loadAssetTypes, loadDomains2, loadLanguages, loadWorkflows
 class Tab2Content extends React.Component {
 
   state = {
-    filter: {selectedDomain: null, selectedDomain2: null, languages: null, workflows:null, assetTypes:null}
+    filter: {selectedDomain: null, selectedDomain2: null, languages: null, workflows:null, assettypes:null}
     // selectedDomain: null
   }
 
@@ -25,16 +25,20 @@ class Tab2Content extends React.Component {
 
 
   handleChange = (filterKey, value) => {
-    console.log("handleChange filterKey ", filterKey);
-    console.log("handleChange value ", value);
-    this.setState({ selectedDomain: value });
+
+    this.setState(prevState => ({
+      filter:{
+        ...prevState.filter,
+        [filterKey]: value
+      }
+    }));
   }
 
 
   handleSubmit = event => {
 
     event.preventDefault();
-    console.log("handleSubmit() filter ", this.state.selectedDomain)
+    console.log("handleSubmit() filter ", this.state.filter)
 
     this.props.loadByFilter(this.state.selectedDomain);
   }
@@ -54,7 +58,7 @@ class Tab2Content extends React.Component {
         <ErrorBoundary>
           <FilterForm domains={this.props.domains} domains2 ={this.props.domains2} 
                       languages ={this.props.languages} workflows ={this.props.workflows} assettypes ={this.props.assettypes}
-            value={this.state.selectedDomain}
+            value={this.state.filter}
              onChange={this.handleChange}
              handleSubmit={this.handleSubmit} />
           <br />
