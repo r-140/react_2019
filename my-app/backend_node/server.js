@@ -31,6 +31,14 @@ api.get('/assets/asset/:id', db.getAssetById)
 
 api.get('/domains', db.getDomains)
 
+api.get('/domains2', db.getDomains2)
+
+api.get('/languages', db.getLanguages)
+
+api.get('/workflows', db.getWorkflows)
+
+api.get('/assettypes', db.getAssetTypes)
+
 
 
 app.use('/api', api);

@@ -6,7 +6,7 @@ import TableFromJson from './content/TableFromJson';
 import ErrorBoundary from './ErrorBoundary';
 import FilterForm from './content/FilterForm'
 import { loadByFilter } from "../../actions/actions";
-import { loadDomains } from "../../actions/filterActions"
+import { loadDomains, loadAssetTypes, loadDomains2, loadLanguages, loadWorkflows } from "../../actions/filterActions"
 
 class Tab2Content extends React.Component {
 
@@ -16,10 +16,15 @@ class Tab2Content extends React.Component {
 
   componentDidMount() {
     this.props.loadDomains();
+    this.props.loadDomains2();
+    this.props.loadAssetTypes();
+    this.props.loadLanguages();
+    this.props.loadWorkflows();
   }
 
 
   handleChange = (value) => {
+    console.log("handleChange value ", value);
     this.setState({ selectedDomain: value });
   }
 
@@ -27,6 +32,7 @@ class Tab2Content extends React.Component {
   handleSubmit = event => {
 
     event.preventDefault();
+    console.log("handleSubmit() filter ", this.state.selectedDomain)
 
     this.props.loadByFilter(this.state.selectedDomain);
   }
@@ -56,6 +62,10 @@ class Tab2Content extends React.Component {
 function mapStateToProps(state) {
   return {
     domains: state.filterReducer.domains,
+    domains2: state.filterReducer.domains2,
+    languages: state.filterReducer.languages,
+    workflows: state.filterReducer.workflows,
+    assettypes: state.filterReducer.assetTypes,
 
     error: state.filterReducer.error
   };
@@ -63,7 +73,7 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { loadByFilter, loadDomains }
+  { loadByFilter, loadDomains, loadDomains2, loadLanguages, loadAssetTypes, loadWorkflows }
 
 )(Tab2Content)
 
