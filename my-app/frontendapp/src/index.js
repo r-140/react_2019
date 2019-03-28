@@ -10,6 +10,7 @@ import TabList from './Tabs.js';
 import store from './store'
 import Tab2Content from './tabs/tab2/Tab2Content.js';
 import { AssetDetailInfo } from './tabs/tab2/content/AssetDetailInfo.js';
+import { AssetFeatures } from './tabs/tab2/content/AssetFeatures.js';
 
 render(
     <Provider store={store}>
@@ -19,6 +20,7 @@ render(
           <Route exact path="/" component={TabList} />
           <Route exact path="/assets" component={Tab2Content} />
           <Route path="/assets/:id" component={AssetDetailInfo} />
+          <Route path="/assets/features/:id" component={AssetFeatures} />
         </Switch>
       </BrowserRouter>
 

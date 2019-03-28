@@ -92,7 +92,7 @@ export class TableFromJson extends React.Component {
                 </span>
             </th>            
         })
-    }</tr>
+    } <th key={Math.random} > Actions</th> </tr>
     };
 
     generateRows(cols, currentDocs) {
@@ -100,9 +100,15 @@ export class TableFromJson extends React.Component {
         return currentDocs.map(function(item) {
             // handle the column data within each row            
             const cells = cols.map(function (colData) {                   
-                return colData === 'id' ? <td key = {Math.random}><Link  to={`/assets/${item.id}`} >{item.id}</Link></td> : <td key={Math.random()}>{item[colData]}</td>;
+                return colData === 'id' ? 
+                    <td key = {Math.random}>
+                        <Link  to={`/assets/${item.id}`} >{item.id}</Link>
+                    </td> : 
+                    <td key={Math.random()}>{item[colData]}</td>;
             });
-            return <tr key={Math.random()} >{cells}</tr>;
+
+
+            return <tr key={Math.random()} >{cells} <td key = {Math.random}><Link  to={`/assets/features/${item.id}`} >Show Features</Link></td></tr>;
         });
     }
 
