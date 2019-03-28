@@ -11,8 +11,7 @@ import { loadDomains, loadAssetTypes, loadDomains2, loadLanguages, loadWorkflows
 class Tab2Content extends React.Component {
 
   state = {
-    filter: {selectedDomain: null, selectedDomain2: null, languages: null, workflows:null, assettypes:null}
-    // selectedDomain: null
+    filter: {selectedDomain: null, selectedDomain2: null, selectedLanguage: null, selectedWorkflow:null, selectedAssettype:null}
   }
 
   componentDidMount() {
