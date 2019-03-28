@@ -98,7 +98,7 @@ const getDomains2 = (request, response) => {
 
 
   // client.query('SELECT pathid, name FROM domain2 order by pathid', (error, results) => {
-    client.query('SELECT sys_symbolic_name as pathid, sys_title as name FROM public.system', (error, results) => {
+    client.query('SELECT id as pathid, title as name FROM public.groups', (error, results) => {
     if (error) {
       throw error
     }
@@ -118,7 +118,7 @@ const getAssetTypes = (request, response) => {
 
 
   // client.query('SELECT asset_type, name FROM asset_typedef order by name', (error, results) => {
-    client.query('SELECT sys_symbolic_name as pathid, sys_title as name FROM public.system', (error, results) => {
+    client.query('SELECT userid as pathid, username as name FROM public.users', (error, results) => {
     if (error) {
       throw error
     }
@@ -138,7 +138,7 @@ const getLanguages = (request, response) => {
 
 
   // client.query('SELECT id, name FROM language_def', (error, results) => {
-    client.query('SELECT sys_symbolic_name as pathid, sys_title as name FROM public.system', (error, results) => {
+    client.query('SELECT userid as pathid, role as name FROM public.user_roles', (error, results) => {
     if (error) {
       throw error
     }
@@ -159,7 +159,7 @@ const getWorkflows = (request, response) => {
 
 
   // client.query('SELECT id, name FROM workflow', (error, results) => {
-    client.query('SELECT sys_symbolic_name as pathid, sys_title as name FROM public.system', (error, results) => {
+    client.query('SELECT id as pathid, sys_title as name FROM public.system', (error, results) => {
     if (error) {
       throw error
     }

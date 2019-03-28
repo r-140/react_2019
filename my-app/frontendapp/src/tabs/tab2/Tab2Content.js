@@ -11,7 +11,8 @@ import { loadDomains, loadAssetTypes, loadDomains2, loadLanguages, loadWorkflows
 class Tab2Content extends React.Component {
 
   state = {
-    selectedDomain: null
+    filter: {selectedDomain: null, selectedDomain2: null, languages: null, workflows:null, assetTypes:null}
+    // selectedDomain: null
   }
 
   componentDidMount() {
@@ -23,7 +24,8 @@ class Tab2Content extends React.Component {
   }
 
 
-  handleChange = (value) => {
+  handleChange = (filterKey, value) => {
+    console.log("handleChange filterKey ", filterKey);
     console.log("handleChange value ", value);
     this.setState({ selectedDomain: value });
   }

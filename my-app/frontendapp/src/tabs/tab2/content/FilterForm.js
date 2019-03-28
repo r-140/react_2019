@@ -5,6 +5,14 @@ import { SelectComponent } from './SelectComponent';
 
 class FilterForm extends React.Component {
 
+  state = {
+    selectedDomain: "selectedDomain",
+    selectedDomain2: "selectedDomain2",
+    languages: "languages",
+    workflows: "workflows",
+    assettypes: "assettypes"
+  }
+
   render() {
 
     // const { domains } = this.props;
@@ -16,25 +24,15 @@ class FilterForm extends React.Component {
     return (
       <form onSubmit={this.props.handleSubmit}>
 
-      <SelectComponent label = "Select Domain: " value={this.props.value} domains={this.props.domains} onChange={this.props.onChange}/>
+      <SelectComponent label = "Select Domain: " filterName={this.state.selectedDomain} value={this.props.value} domains={this.props.domains} onChange={this.props.onChange}/>
 
-      <SelectComponent label = "Select Domain2: " value={this.props.value} domains={this.props.domains2} onChange={this.props.onChange}/>
-        {/* <label>
-          Select Domain:
-        <select value={this.props.value || ''} onChange={e => this.props.onChange(e.target.value)}>
+      <SelectComponent label = "Select Domain2: " filterName={this.state.selectedDomain2} value={this.props.value} domains={this.props.domains2} onChange={this.props.onChange}/>
 
-            {
+      {/* <SelectComponent label = "Select Language: " filterName={this.state.languages} value={this.props.value} domains={this.props.languages} onChange={this.props.onChange}/>
 
-              domains.map(item => (
+      <SelectComponent label = "Select Workflow: " filterName={this.state.workflows} value={this.props.value} domains={this.props.workflows} onChange={this.props.onChange}/>
 
-                <option key={uuidv1()} value={item.pathid}>
-                  {item.name}
-                </option>
-              ))
-            }
-          </select>
-        </label>
-        */}
+      <SelectComponent label = "Select Type: " filterName={this.state.assettypes} value={this.props.value} domains={this.props.assettypes} onChange={this.props.onChange}/> */}
         <input type="submit" value="Find Assets" /> 
       </form>
     );
