@@ -19,7 +19,7 @@ render(
           {/* <Route path="/login" component={Login} /> */}
           <Route exact path="/" component={TabList} />
           <Route exact path="/assets" component={Tab2Content} />
-          <Route path="/assets/:id" component={AssetDetailInfo} />
+          <Route exact path="/assets/:id" component={AssetDetailInfo} />
           <Route path="/assets/features/:id" component={AssetFeatures} />
         </Switch>
       </BrowserRouter>

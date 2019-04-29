@@ -4,6 +4,9 @@ import uuidv1 from "uuid";
 
 export class SelectComponent extends React.Component {
 
+	state = {
+		defaultValue: null
+	}
 	
 
 	render() {
@@ -13,13 +16,15 @@ export class SelectComponent extends React.Component {
 			<label>
 				{label}
 				<select value={this.props.value || ''} onChange={e => this.props.onChange(this.props.filterName, e.target.value)}>
-					{
-						list.map(item => (
-							<option key={uuidv1()} value={item.pathid}>
-							{item.name}
-							</option>
-						))
-					}
+				<option value=''></option>
+				{
+					// <option value=''></option>
+					list.map(item => (
+						<option key={uuidv1()} value={item.pathid}>
+						{item.name}
+						</option>
+					))
+				}
 				</select>
 			</label>
 		)
