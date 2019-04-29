@@ -24,10 +24,19 @@ export class TableFromJson extends React.Component {
         this.props.sortAssets(sortKey, desc);
     }
 
-    componentDidMount() {
+    /*
+    componentWillMount lifecycle method. It is called on both the server and the client.
+     It is triggered immediately before mounting and render occurs.
+    */
+    componentWillMount() {
         this.props.loadAssets();
     }
 
+
+/*
+componentWillReceiveProps lifecycle method for client-side navigating (it will trigger the same action). 
+So further page loads handled by the browser fetch the correct data
+*/
     componentWillReceiveProps({ location = {} }) {
         if (location.pathname === '/assets' && location.pathname !== this.props.location.pathname) {
             this.props.loadAssets();

@@ -42,43 +42,6 @@ class Tab2Content extends React.Component {
     this.props.loadByFilter(this.state.selectedDomain);
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.domains !== prevProps.domains) {
-  //     this.setState(prevState => ({
-  //       ...prevState.filter,
-  //       selectedDomain: this.props.domains[0].pathid
-  //     }));
-  //   }
-
-  //   // if (this.props.domains2 !== prevProps.domains2) {
-  //   //   this.setState({
-  //   //     selectedDomain2: this.props.domains2[0].pathid
-  //   //   });
-  //   // }
-
-  //   // if (this.props.languages !== prevProps.languages) {
-  //   //   this.setState({
-  //   //     ...filter,
-  //   //     selectedLanguage: this.props.languages[0].pathid
-  //   //   });
-  //   // }
-
-  //   // if (this.props.workflows !== prevProps.workflows) {
-  //   //   this.setState({
-  //   //     ...prevState.filter,
-  //   //     selectedWorkflow: this.props.workflows[0].pathid
-  //   //   });
-  //   // }
-
-  //   // if (this.props.assetTypes !== prevProps.assetTypes) {
-  //   //   this.setState({
-  //   //     ...prevState.filter,
-  //   //     selectedAssettype: this.props.assetTypes[0].pathid
-  //   //   });
-  //   // }
-  // }
-
-
   render() {
     return (
       <div key="rootstr">
