@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SelectComponent /> Should render passed list 1`] = `
+<label>
+  label
+  <select
+    onChange={[Function]}
+    value=""
+  >
+    <option
+      value=""
+    />
+    if(isEmpty(list)===false)
+    <option
+      value="root."
+    >
+      Root
+    </option>
+    <option
+      value="root.krone."
+    >
+      krone
+    </option>
+  </select>
+</label>
+`;

@@ -37,5 +37,12 @@ class FilterForm extends React.Component {
 
 }
 
+
+// FilterForm.defaultProps = {
+// 	list: {},
+// 	filterName: 'filterName',
+// 	label: 'select',
+// 	onChange: () => {}
+//   };
 export default FilterForm;
 
